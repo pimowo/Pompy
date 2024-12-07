@@ -37,7 +37,9 @@ void setPump(byte pumpIndex, bool state) {
     } else {
         pumpStates &= ~(1 << pumpIndex); // Wyczyść bit
     }
-    pcf.write(~pumpStates);  // Zanegowane, bo PCF8574 ma odwróconą logikę (0 = ON, 1 = OFF)
+    for (int i = 0; i < 8; i++) {
+        pcf.digitalWrite(i, !(pumpStates & (1 << i))); // Zanegowane, bo PCF8574 ma odwróconą logikę
+    }
 }
 
 // Dozowanie dla danej pompy
