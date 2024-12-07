@@ -91,8 +91,6 @@ void loadSettings() {
     }
 }
 
-// ... poprzednie funkcje ...
-
 // Funkcja kalibracji
 void calibratePump(byte pumpIndex, int calibrationTime) {
     Serial.print("Rozpoczynam kalibrację pompy ");
@@ -146,9 +144,9 @@ void handleSerialCommands() {
                     values[index] = command.substring(startPos).toInt();
                     break;
                 }
-                    values[index] = command.substring(startPos, commaPos).toInt();
-                    startPos = commaPos + 1;
-                    index++;
+                values[index] = command.substring(startPos, commaPos).toInt();
+                startPos = commaPos + 1;
+                index++;
             }
       
             // Aktualizacja ustawień pompy
@@ -231,7 +229,7 @@ void setup() {
     // Ustaw wszystkie piny PCF8574 jako wyjścia
     for (byte i = 0; i < 8; i++) {
         pcf.pinMode(i, OUTPUT);
-        pcf.digitalWrite(i, LOW);
+        pcf.digitalWrite(i, HIGH);
     }
   
     // Inicjalizacja EEPROM
